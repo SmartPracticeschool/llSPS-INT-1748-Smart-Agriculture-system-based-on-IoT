@@ -1,0 +1,375 @@
+[
+    {
+        "id": "caf87e0f.c5788",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "8168635.cb750a",
+        "type": "ibmiot in",
+        "z": "caf87e0f.c5788",
+        "authentication": "apiKey",
+        "apiKey": "e9d1aaf4.203b48",
+        "inputType": "evt",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "Arduino",
+        "applicationId": "",
+        "deviceType": "IoTDevice",
+        "eventType": "Data",
+        "commandType": "",
+        "format": "json",
+        "name": "IBM IoT",
+        "service": "registered",
+        "allDevices": "",
+        "allApplications": "",
+        "allDeviceTypes": "",
+        "allLogicalInterfaces": "",
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": "",
+        "qos": 0,
+        "x": 180,
+        "y": 220,
+        "wires": [
+            [
+                "8e1c74b8.e6f0d8",
+                "24e3e91f.51a7b6",
+                "70841220.81e95c"
+            ]
+        ]
+    },
+    {
+        "id": "99c5fb85.28be28",
+        "type": "debug",
+        "z": "caf87e0f.c5788",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 750,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "8e1c74b8.e6f0d8",
+        "type": "function",
+        "z": "caf87e0f.c5788",
+        "name": "Temperature",
+        "func": "msg.payload=msg.payload.d.temperature;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 370,
+        "y": 260,
+        "wires": [
+            [
+                "99c5fb85.28be28",
+                "f3c32570.516d88"
+            ]
+        ]
+    },
+    {
+        "id": "70841220.81e95c",
+        "type": "function",
+        "z": "caf87e0f.c5788",
+        "name": "Humidity",
+        "func": "msg.payload=msg.payload.d.humidity;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 380,
+        "y": 200,
+        "wires": [
+            [
+                "99c5fb85.28be28",
+                "dca40139.a5d06"
+            ]
+        ]
+    },
+    {
+        "id": "24e3e91f.51a7b6",
+        "type": "function",
+        "z": "caf87e0f.c5788",
+        "name": "Soil_Temperature",
+        "func": "msg.payload=msg.payload.d.objectTemp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 140,
+        "wires": [
+            [
+                "99c5fb85.28be28",
+                "f15bef3c.c273b"
+            ]
+        ]
+    },
+    {
+        "id": "f3c32570.516d88",
+        "type": "ui_gauge",
+        "z": "caf87e0f.c5788",
+        "name": "",
+        "group": "7b5d548.9f167ac",
+        "order": 0,
+        "width": "0",
+        "height": "0",
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "Degree C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#e5df34",
+            "#f25c1c",
+            "#eb003b"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 550,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "dca40139.a5d06",
+        "type": "ui_gauge",
+        "z": "caf87e0f.c5788",
+        "name": "",
+        "group": "b215a974.5bf978",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#6af1fb",
+            "#1eabbe",
+            "#7b3acb"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 600,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "f15bef3c.c273b",
+        "type": "ui_gauge",
+        "z": "caf87e0f.c5788",
+        "name": "",
+        "group": "7ad30728.5505f8",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Soil_moisture",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#e17f23",
+            "#883407",
+            "#1e1a1a"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 660,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "3a12e3ef.6dcc5c",
+        "type": "http request",
+        "z": "caf87e0f.c5788",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "http://api.openweathermap.org/data/2.5/weather?q=Durg,IN&appid=df26efc7f4ef618aae7030badadc2435",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 350,
+        "y": 40,
+        "wires": [
+            [
+                "99c5fb85.28be28"
+            ]
+        ]
+    },
+    {
+        "id": "872eb91.e3ed548",
+        "type": "inject",
+        "z": "caf87e0f.c5788",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "x": 90,
+        "y": 140,
+        "wires": [
+            [
+                "3a12e3ef.6dcc5c"
+            ]
+        ]
+    },
+    {
+        "id": "23f71a34.ce4b46",
+        "type": "ibmiot out",
+        "z": "caf87e0f.c5788",
+        "authentication": "apiKey",
+        "apiKey": "e9d1aaf4.203b48",
+        "outputType": "cmd",
+        "deviceId": "21010800",
+        "deviceType": "Motor",
+        "eventCommandType": "command",
+        "format": "json",
+        "data": "data",
+        "qos": 0,
+        "name": "IBM IoT",
+        "service": "registered",
+        "x": 560,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "ff756a29.63fa58",
+        "type": "ui_button",
+        "z": "caf87e0f.c5788",
+        "name": "",
+        "group": "7b6c5ee8.92db1",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Motor On",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "{\"command\":\"motoron\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 210,
+        "y": 380,
+        "wires": [
+            [
+                "23f71a34.ce4b46"
+            ]
+        ]
+    },
+    {
+        "id": "28b239b7.a386d6",
+        "type": "ui_button",
+        "z": "caf87e0f.c5788",
+        "name": "",
+        "group": "72b180aa.a0686",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Motor Off",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "{\"command\":\"motoroff\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 210,
+        "y": 460,
+        "wires": [
+            [
+                "23f71a34.ce4b46"
+            ]
+        ]
+    },
+    {
+        "id": "e9d1aaf4.203b48",
+        "type": "ibmiot",
+        "z": "",
+        "name": "",
+        "keepalive": "60",
+        "serverName": "",
+        "cleansession": true,
+        "appId": "",
+        "shared": false
+    },
+    {
+        "id": "7b5d548.9f167ac",
+        "type": "ui_group",
+        "z": "",
+        "name": "smart Agriculture soil Temperature",
+        "tab": "ded1c32c.3ebde",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "b215a974.5bf978",
+        "type": "ui_group",
+        "z": "",
+        "name": "Smart Agriculture Humidity-1",
+        "tab": "ded1c32c.3ebde",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "7ad30728.5505f8",
+        "type": "ui_group",
+        "z": "",
+        "name": "Motor Command",
+        "tab": "ded1c32c.3ebde",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "7b6c5ee8.92db1",
+        "type": "ui_group",
+        "z": "",
+        "name": "Agriculture motor on",
+        "tab": "ded1c32c.3ebde",
+        "order": 5,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "72b180aa.a0686",
+        "type": "ui_group",
+        "z": "",
+        "name": "Agriculture motor off",
+        "tab": "ded1c32c.3ebde",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "ded1c32c.3ebde",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Smart-Agriculture-IoT",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
